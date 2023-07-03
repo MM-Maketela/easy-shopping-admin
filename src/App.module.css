@@ -1,0 +1,8 @@
+#flex{
+  display: flex;
+}
+
+#routes{
+ flex-grow: 1;
+ height: 100vh;
+}

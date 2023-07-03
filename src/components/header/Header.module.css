@@ -1,0 +1,47 @@
+#Header{
+    height: 20vh;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(24, 27, 41,1);
+    padding-inline: 1rem;
+    margin-bottom: 4rem;
+}
+#otherIcons{
+    height: fit-content;
+    margin-block: auto;
+    display: flex;
+    color: white;
+    gap: .5rem;
+}
+#bell, #mail, #profile{
+    cursor: pointer;
+}
+#bar{
+    height: 2rem;
+    margin-block: auto;
+    padding-inline: 2rem;
+    outline: none;
+    border-radius: none;
+    border-color: white;
+}
+#search{
+    background-color: red;
+    text-align: center;
+    height: fit-content;
+    margin-block:auto;
+    height: 2rem; 
+    display: flex;
+    padding: .19rem;
+    padding-inline: 1rem;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+#search>div{
+    height: fit-content;
+    margin-block: auto;
+}
+#searchBar{
+    margin-block: auto;
+    color: white;
+    display: flex;
+}

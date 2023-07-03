@@ -1,0 +1,16 @@
+#products{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+ 
+}
+#productsInnerContainer{
+    
+    flex-grow: 1;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 2rem;
+    text-align: center;
+}
