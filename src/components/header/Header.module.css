@@ -35,11 +35,13 @@
     padding-inline: 1rem;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+    cursor: pointer;
 }
 #search>div{
     height: fit-content;
     margin-block: auto;
 }
+
 #searchBar{
     margin-block: auto;
     color: white;

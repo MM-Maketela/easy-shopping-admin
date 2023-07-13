@@ -6,8 +6,16 @@ color: white;
   gap: 2rem;
   /* temp */
   
+
+}
+
+.link{
+  text-decoration: none;
+  outline: none;
+  color: steelblue;
   
 }
+
 .topHeader{
     display: flex;
     margin-top:0px;
@@ -28,4 +36,8 @@ color: white;
    gap: 1rem;
    padding-inline: 1rem;
 
+}
+.link{
+  text-decoration: none;
+  outline: none;
 }

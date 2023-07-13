@@ -8,24 +8,28 @@ export const SideBar = () => {
 
   return (
     <div className={classes.SideBar}>
-
-      <div className={classes.topHeader}>
-        <BsCardChecklist  size={50}/>
-        <div>Easy-Shopping</div>
-      </div>
+        <Link to={'/'} className={classes.link}>
+            <div className={classes.topHeader}>
+            <BsCardChecklist  size={50}/>
+            <div>Easy-Shopping</div>
+          </div>
+        </Link>
+     
       <div className={classes.elements}>
 
-
-      <Link to={'/products'}>
+      
+      <Link to={'/products'} className={classes.link}>
       <MiniCard info={{info:"products"}}/>
       </Link>
-      <Link to={'/stats'}>
+      <Link to={'/stats'} className={classes.link}>
       <MiniCard info={{info:"stats"}}/>
       </Link>
-      <Link to={'/settings'}>
+      <Link to={'/settings'} className={classes.link}>
       <MiniCard info={{info:"settings"}}/>
       </Link>
-        
+      <Link to={'/'}  className={classes.link}>
+      <MiniCard info={{info:"help"}}/>
+      </Link>
         
 
       </div>

@@ -5,12 +5,13 @@ import classes from './MiniBar.module.css'
 export const MiniBar = (props) => {
 
     const {title} = props.info
+   
   return (
-    <div id={classes.miniBar}>
-        <div id={classes.miniNav}>some info</div>
-        <div  id={classes.button}>
-            {title === "products" ? <Link  to={'/addProduct'} >ADD PRODUCT</Link>:<div></div>}
-        </div>
-    </div>
+     <div id={classes.miniBar}>
+                          <div id={classes.miniNav}>some info</div>
+                          {title==='products' ? <Link id={classes.button} to={'/addProduct'}>
+                              ADD PRODUCT
+                          </Link>:<div></div>}
+                      </div>
   )
 }
