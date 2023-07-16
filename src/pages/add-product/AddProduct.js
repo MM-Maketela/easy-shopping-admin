@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react'
 import classes from './AddProduct.module.css'
 import {RiImageAddLine} from 'react-icons/ri/index.esm'
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4} from 'uuid'
 
 
 export const AddProduct = () => {
@@ -10,9 +10,9 @@ export const AddProduct = () => {
   let [category, setCategory] = useState("")
   let [discount, setDiscount] = useState(0)
   let [price, setPrice] = useState(0)
-  let [inStock, setInStock] = useState("yes")
+  let [inStock, setInStock] = useState("YES")
   let [details, setDetails] = useState("")
-  let [productNew, setProductNew] = useState("no")
+  let [productNew, setProductNew] = useState("NO")
   let [image0, setImage0] = useState(null)
   let [image1, setImage1] = useState(null)
   let [image2, setImage2] = useState(null)
@@ -85,28 +85,46 @@ export const AddProduct = () => {
 
         <div >
           <ul className={classes.images}>
-          <li onClick={()=>{
-            document.getElementsByName('image0')[0].click()
-          }}> 
+          <li> 
           <input  type='file'  accept='image/*' name ='image0' hidden required  onChange={(event)=>{
-            console.log(image0)
             setImage0(event.target.files[0])
           }}/>
           
-          {image0 === null ? <RiImageAddLine    className={classes.icons}/>:<div className={classes.imageContainer}><img src={ URL.createObjectURL(image0)}  className={classes.img}/></div>}
-          
+          {image0 === null ? <div className={classes.iconContainer} onClick={()=>{
+              document.getElementsByName('image0')[0].click()
+          }}><RiImageAddLine    className={classes.icons}/></div>:<div className={classes.imageContainer}><img src={ URL.createObjectURL(image0)}  className={classes.img}/> <button type='button' className={classes.removeBtn} onClick={()=>{
+            setImage0(null)
+          }}>remove</button></div>}
         </li>
         <li  >
-          <input  type='file'  name='image1' hidden  required/>
-          <RiImageAddLine    className={classes.icons}/>
+          <input  type='file' accept='image/*' name='image1' hidden  required onChange={(event)=>{
+            setImage1(event.target.files[0])
+          }}/>
+          {image1 === null ? <div className={classes.iconContainer} onClick={()=>{
+              document.getElementsByName('image1')[0].click()
+          }}><RiImageAddLine    className={classes.icons}/></div>:<div className={classes.imageContainer}><img src={ URL.createObjectURL(image1)}  className={classes.img}/> <button type='button' className={classes.removeBtn} onClick={()=>{
+            setImage1(null)
+          }}>remove</button></div>}
         </li>
         <li>
-          <input  type='file'  name='image2' hidden  required/>
-          <RiImageAddLine    className={classes.icons}/>
+          <input  type='file' accept='image/*' name='image2' hidden  required onChange={(event)=>{
+            setImage2(event.target.files[0])
+          }}/>
+          {image2 === null ? <div className={classes.iconContainer} onClick={()=>{
+              document.getElementsByName('image2')[0].click()
+          }}><RiImageAddLine    className={classes.icons}/></div>:<div className={classes.imageContainer}><img src={ URL.createObjectURL(image2)}  className={classes.img}/> <button type='button' className={classes.removeBtn} onClick={()=>{
+            setImage2(null)
+          }}>remove</button></div>}
         </li>
         <li >
-          <input  type='file'  name='image3' hidden   required/>
-          <RiImageAddLine    className={classes.icons} />
+          <input  type='file' accept='image/*' name='image3' hidden   required onChange={(event)=>{
+            setImage3(event.target.files[0])
+          }}/>
+          {image3 === null ? <div className={classes.iconContainer} onClick={()=>{
+              document.getElementsByName('image3')[0].click()
+          }}><RiImageAddLine    className={classes.icons}/></div>:<div className={classes.imageContainer}><img src={ URL.createObjectURL(image3)}  className={classes.img}/> <button type='button' className={classes.removeBtn} onClick={()=>{
+            setImage3(null)
+          }}>remove</button></div>}
         </li>
           </ul>
         </div>

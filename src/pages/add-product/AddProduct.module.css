@@ -132,16 +132,42 @@ gap: 1rem;
     background-color: white;
     color: red;
 }
+
+@keyframes imageAnimation {
+    0% {transform: scale(1);}
+    100% {transform: scale(2);}
+    
+}
 .img, .icons{
     width: 8rem;
     height: 8rem;
 }
+.img:hover{
+    animation-name: imageAnimation;
+    animation-duration: 3s;
+    transform: scale(2);
+}
 .imageContainer{
     width: fit-content;
     height: fit-content;
+    display: grid;
 }
 .icons{
     border: 4px solid steelblue;
     color: rgba(70, 131, 180, 0.6);
     cursor: pointer;
+}
+.removeBtn{
+    background-color: red;
+    border: 3px solid red;
+    width: 100%;
+    box-sizing: border-box;
+    font-weight: bold;
+    font-style: italic;
+    color: white;
+    cursor: pointer;
+}
+.removeBtn:hover{
+    background-color: white;
+    color: red;
 }
