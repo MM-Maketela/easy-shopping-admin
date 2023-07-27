@@ -28,10 +28,12 @@ export const AddProduct = () => {
 
     
 
-    fetch("localhost:3003/client/products/", {
+    fetch("http://localhost:3003/client/products/", {
       method: 'POST',
-      body:"data"
+      body:formData
     })
+    .then(res => res.json())
+    .then(data => console.log(data))
     
   }
   return(
