@@ -21,19 +21,26 @@ export const AddProduct = () => {
   const SIZE = 80
   function addProduct(event){
     event.preventDefault()
-    const form = document.getElementById("#form")
-    const formData = new FormData(form);
+    const myForm = document.getElementsByName('my-form')[0]
+    const formData = new FormData(myForm)
     const id = uuidv4()
-    formData.append('id',id)
-  }
+    formData.append("id",id)
 
+    
+
+    fetch("localhost:3003/client/products/", {
+      method: 'POST',
+      body:"data"
+    })
+    
+  }
   return(
     <div className={classes.formContainer}  onSubmit={event => addProduct(event)}>
 
       <div className={classes.formHeaderContainer}>
       <div className={classes.formHeader}>ADD PRODUCT</div>
       </div>
-      <form id={classes.form}>
+      <form id={classes.form}  name='my-form'>
         <div className={classes.formInnerContainer}>
         <div className={classes.part1}>
         <ul className={classes.uList} >
@@ -82,7 +89,6 @@ export const AddProduct = () => {
       </ul>
         </div>
         </div>
-
         <div >
           <ul className={classes.images}>
           <li> 
@@ -96,7 +102,7 @@ export const AddProduct = () => {
             setImage0(null)
           }}>remove</button></div>}
         </li>
-        <li  >
+        <li>
           <input  type='file' accept='image/*' name='image1' hidden  required onChange={(event)=>{
             setImage1(event.target.files[0])
           }}/>
