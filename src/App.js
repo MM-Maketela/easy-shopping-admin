@@ -9,6 +9,7 @@ import {AddProduct} from './pages/add-product/AddProduct.js'
 import {SideBar} from './components/side-bar/SideBar.js'
 import { Stats } from './pages/stats/Stats';
 import { Settings } from './pages/settings/Settings';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         </div>
       </div>
     <Footer/>
+    <ToastContainer/>
       
     </div>
   );

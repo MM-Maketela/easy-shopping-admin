@@ -2,10 +2,10 @@ import React,{useEffect, useState} from 'react'
 import classes from './AddProduct.module.css'
 import {RiImageAddLine} from 'react-icons/ri/index.esm'
 import { v4 as uuidv4} from 'uuid'
-
+import {toast} from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css";
 
 export const AddProduct = () => {
-
   let [productName, setProductName] = useState("")
   let [category, setCategory] = useState("")
   let [discount, setDiscount] = useState(0)
@@ -17,7 +17,6 @@ export const AddProduct = () => {
   let [image1, setImage1] = useState(null)
   let [image2, setImage2] = useState(null)
   let [image3, setImage3] = useState(null)
-  
   const SIZE = 80
   function addProduct(event){
     event.preventDefault()
@@ -25,16 +24,20 @@ export const AddProduct = () => {
     const formData = new FormData(myForm)
     const id = uuidv4()
     formData.append("id",id)
+ 
 
-    
-
-    fetch("http://localhost:3003/client/products/", {
+    try{
+      fetch("http://localhost:3003/client/products/", {
       method: 'POST',
       body:formData
     })
     .then(res => res.json())
-    .then(data => console.log(data))
-    
+    .then(data => (data['success'] >0 && data['data'].affectedRows>0) ?
+     toast.success(`product added to database.`, { position: toast.POSITION.TOP_CENTER, autoClose: 2000 }):
+     toast.warn(`product not added to database.`, { position: toast.POSITION.TOP_CENTER, autoClose: 2000 }))
+    }catch(e){
+      console.log(e)
+    }
   }
   return(
     <div className={classes.formContainer}  onSubmit={event => addProduct(event)}>
