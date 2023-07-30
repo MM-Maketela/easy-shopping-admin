@@ -17,10 +17,10 @@ export const AddProduct = (props) => {
   let [image1, setImage1] = useState(null)
   let [image2, setImage2] = useState(null)
   let [image3, setImage3] = useState(null)
-  let [id, setId]= useState('')
   let [_process, set_process] = useState('added')
   let [method , setMethod] = useState('POST')
   let [path , setPath] = useState("http://localhost:3003/client/products/")
+  let [_id, set_id]= useState("")
   const SIZE = 80
 
 
@@ -43,12 +43,11 @@ export const AddProduct = (props) => {
       setInStock(product.inStock)
       setPrice(product.price)
       setProductNew(product.new)
-      setId(product.id)
       set_process("updated")
       setMethod("PATCH")
+      set_id(product.id)
       setPath(`http://localhost:3003/client/products/${product.id}`)
       //to handle images
-
       toast.success('product successfully loaded.',{position:toast.POSITION.TOP_CENTER, autoClose: 2000 })
 
     })
@@ -72,12 +71,15 @@ export const AddProduct = (props) => {
     const myForm = document.getElementsByName('my-form')[0]
     const formData = new FormData(myForm)
 
-    if(id === ''){
-      setId(uuidv4())
+    if(props.process['process']==='ADD PRODUCT'){
+      const id = uuidv4()
+      formData.append("id",id)
     }
-    formData.append("id",id)
+    else if(props.process['process']==='EDIT PRODUCT'){
+      formData.append("id",_id)
+    }
     
-   
+    
     try{
       fetch(path, {
       method: method,
