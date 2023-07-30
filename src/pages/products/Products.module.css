@@ -1,19 +1,22 @@
 #products{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
+    width: 100% !important;
     max-height: 100vh;
     overflow:scroll;
+    box-sizing: border-box;
+    border: 2xp solid red;
+    display: grid;
  
 }
 #productsInnerContainer{
     padding: 1rem;
     display: grid;
-    grid-template-columns: 33% 33% 33%;
+    grid-template-columns: 30% 30% 30%;
     gap: 2rem;
     text-align: center;
     height: fit-content;
+    width: 100%;
+    box-sizing: border-box;
+    margin-inline: auto;
 }
 .eachProduct{
     margin-inline: auto;
