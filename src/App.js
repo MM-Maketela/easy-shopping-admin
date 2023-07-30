@@ -21,7 +21,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Admin />}/>
           <Route path="/products" element={<Products/>}/>
-          <Route path="/addProduct" element={<AddProduct />}/>
+          <Route path="/addProduct/add" element={<AddProduct  process={{process:'ADD PRODUCT'}}/>}/>
+          <Route path="/addProduct/edit/:id" element={<AddProduct  process={{process:'EDIT PRODUCT'}}/>}/>
           <Route path='/stats' element={<Stats/>} />
           <Route path='/settings' element={<Settings />} />
         </Routes>

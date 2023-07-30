@@ -1,29 +1,60 @@
-import React,{useEffect} from 'react'
+import React, { useEffect, useState } from 'react'
+
+
 import { MiniBar } from '../../components/mini-bar/MiniBar'
 import classes from './Products.module.css'
 import { Product } from '../../components/product/Product'
 import shoes from '../../assets/images/shoes.jpg'
 export const Products = () => {
 
+  let [data, setData] = useState(null)
 
-  const product = {image:shoes, name:'test', price:300, discount:12,  category:'category', details:"Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et ", new:1, brand:'testing brand', rating:4}
+  //getting products
+
+ async function handleProducts(){
+  try{
+     await fetch("http://localhost:3003/client/products")
+    .then(res => res.json())
+    .then(data => setData(data))
+  }catch(e){
+    console.log(e)
+  }
+ }
+
+  // handing products
+  useEffect(()=>{
+    handleProducts()
+  },[])
+
   
-  const products = [product,product,product,product,product,product,product,product,product]
+  function productMap(products){
+    let _products = []
+    //handle image
+  
+    for(let i =0; i<products.length; i++){
+        const product = {handleProducts:handleProducts, id:products[i].id, image:shoes, name:products[i].name, price:products[i].price, discount:products[i].discount,  category:products[i].category, details:products[i].details, new:products[i].new, brand:'testing brand', rating:4}
+        _products.push(product)
+    }
 
-  function productMap(){
-     return products.map((product,index)=> <div key={index}>{<Product info={{product:product}}/>}</div>)
+     return _products.map((product,index)=> <div key={index} className={classes.eachProduct}>{<Product info={{product:product}}/>}</div>)
   }
   return (
-    <div id={classes.products}>
-      <MiniBar info={{title:"products"}}/>
+    <>
+    <MiniBar info={{title:"products"}}/>
+    {
+      data ?  <div id={classes.products}>
+      
 
       <div id={classes.productsInnerContainer}>
 
         {
-        productMap()
+        productMap(data['data'])
         }
 
       </div>
-    </div>
+    </div>: <div><h1 style={{fontSize:'3rem',color:'red'}}>Loading...</h1></div>
+    }
+    
+    </>
   )
 }

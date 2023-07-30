@@ -5,7 +5,7 @@ import { v4 as uuidv4} from 'uuid'
 import {toast} from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
 
-export const AddProduct = () => {
+export const AddProduct = (props) => {
   let [productName, setProductName] = useState("")
   let [category, setCategory] = useState("")
   let [discount, setDiscount] = useState(0)
@@ -17,24 +17,80 @@ export const AddProduct = () => {
   let [image1, setImage1] = useState(null)
   let [image2, setImage2] = useState(null)
   let [image3, setImage3] = useState(null)
+  let [id, setId]= useState('')
+  let [_process, set_process] = useState('added')
+  let [method , setMethod] = useState('POST')
+  let [path , setPath] = useState("http://localhost:3003/client/products/")
   const SIZE = 80
+
+
+  // handle edit product 
+  function handleEdit(){
+    const id = window.location.pathname.split('/')[3]
+    fetch(`http://localhost:3003/client/products/${id}`)
+    .then(res => res.json())
+    .then(data => {
+      if(data['success']===0){
+        toast.warn('failed to load product!',{position:toast.POSITION.TOP_CENTER, autoClose: 2000 })
+        return
+      }
+
+      const product = data['data'][0]
+      setProductName(product.name)
+      setCategory(product.category)
+      setDiscount(product.discount)
+      setDetails(product.details)
+      setInStock(product.inStock)
+      setPrice(product.price)
+      setProductNew(product.new)
+      setId(product.id)
+      set_process("updated")
+      setMethod("PATCH")
+      setPath(`http://localhost:3003/client/products/${product.id}`)
+      //to handle images
+
+      toast.success('product successfully loaded.',{position:toast.POSITION.TOP_CENTER, autoClose: 2000 })
+
+    })
+  }
+
+  useEffect(()=>{
+
+    if(props.process['process']==='EDIT PRODUCT') {
+      handleEdit()
+    }
+
+  },[])
+
+
+  
+
+
+  // handle add product
   function addProduct(event){
     event.preventDefault()
     const myForm = document.getElementsByName('my-form')[0]
     const formData = new FormData(myForm)
-    const id = uuidv4()
-    formData.append("id",id)
- 
 
+    if(id === ''){
+      setId(uuidv4())
+    }
+    formData.append("id",id)
+    
+   
     try{
-      fetch("http://localhost:3003/client/products/", {
-      method: 'POST',
+      fetch(path, {
+      method: method,
       body:formData
     })
     .then(res => res.json())
-    .then(data => (data['success'] >0 && data['data'].affectedRows>0) ?
-     toast.success(`product added to database.`, { position: toast.POSITION.TOP_CENTER, autoClose: 2000 }):
-     toast.warn(`product not added to database.`, { position: toast.POSITION.TOP_CENTER, autoClose: 2000 }))
+    .then(data => {(data['success'] >0 && data['data'].affectedRows>0) ?
+     toast.success(`product ${_process} to database.`, { position: toast.POSITION.TOP_CENTER, autoClose: 2000 }):
+     toast.warn(`product not ${_process} to database.`, { position: toast.POSITION.TOP_CENTER, autoClose: 2000 })
+    })
+  
+      
+    
     }catch(e){
       console.log(e)
     }
@@ -43,7 +99,7 @@ export const AddProduct = () => {
     <div className={classes.formContainer}  onSubmit={event => addProduct(event)}>
 
       <div className={classes.formHeaderContainer}>
-      <div className={classes.formHeader}>ADD PRODUCT</div>
+      <div className={classes.formHeader}>{props.process['process']}</div>
       </div>
       <form id={classes.form}  name='my-form'>
         <div className={classes.formInnerContainer}>

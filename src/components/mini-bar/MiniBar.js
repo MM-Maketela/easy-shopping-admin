@@ -9,7 +9,7 @@ export const MiniBar = (props) => {
   return (
      <div id={classes.miniBar}>
                           <div id={classes.miniNav}>some info</div>
-                          {title==='products' ? <Link id={classes.button} to={'/addProduct'}>
+                          {title==='products' ? <Link id={classes.button} to={'/addProduct/add'}>
                               ADD PRODUCT
                           </Link>:<div></div>}
                       </div>

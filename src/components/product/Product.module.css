@@ -1,4 +1,7 @@
 
+#Product{
+    max-width: 18rem;
+}
 .productInnerContainer{
     background-color: white;
     border: 4px solid rgba(128, 128, 128, 0.3);

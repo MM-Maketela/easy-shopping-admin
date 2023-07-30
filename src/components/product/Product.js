@@ -1,8 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
+import {toast} from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css";
+
 import classes from './Product.module.css'
 import image from '../../assets/images/shoes.jpg'
+import { Link } from 'react-router-dom';
 export const Product = (props) => {
   const {product} = props.info
+  let [response, setResponse] = useState({})
+  
+  // handle edit 
+  async function handleDelete(){
+      await fetch(`http://localhost:3003/client/products/${product.id}`,{
+        method:'DELETE',
+        body:product.id
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        if(!(data['success']===1 && data['data'].affectedRows!==0)){
+        toast.warn(`product not removed to database.`, { position: toast.POSITION.TOP_CENTER, autoClose: 2000 })
+        return
+        }
+        toast.success(`product removed to database.`, { position: toast.POSITION.TOP_CENTER, autoClose: 2000 })
+        product.handleProducts()
+    })
+  }
   return (
     <div id={classes.Product}>
     <div className={classes.productInnerContainer}>
@@ -18,6 +41,7 @@ export const Product = (props) => {
       <div id={classes.innerContainerInfo}>
         <div>
           {product.name}
+          
         </div>
         <div>
           {product.category}
@@ -25,7 +49,7 @@ export const Product = (props) => {
 
         <div id={classes.price_rating}>
           <div>
-            {product.price}
+            R{product.price}
           </div>
           <div>
             {product.rating}
@@ -37,8 +61,9 @@ export const Product = (props) => {
 
     </div>
     <div className={classes.buttonClass}>
-      <button  type='button' className={classes.button} id={classes.edit}>edit</button>
-      <button type='button' className={classes.button} id={classes.delete}>delete</button>
+      <Link to={`/addProduct/edit/${product.id}`}  hidden   name='edit-link'/>
+      <button  type='button' className={classes.button} id={classes.edit}  onClick={()=>{ document.getElementsByName('edit-link')[0].click()}}>edit</button>
+      <button type='button' className={classes.button} id={classes.delete} onClick={()=>{handleDelete()}}>delete</button>
     </div>
     </div>
   )
