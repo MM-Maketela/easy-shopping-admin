@@ -10,6 +10,7 @@ import {SideBar} from './components/side-bar/SideBar.js'
 import { Stats } from './pages/stats/Stats';
 import { Settings } from './pages/settings/Settings';
 import { ToastContainer } from 'react-toastify';
+import { Profile } from './pages/profile/Profile';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/addProduct/edit/:id" element={<AddProduct  process={{process:'EDIT PRODUCT'}}/>}/>
           <Route path='/stats' element={<Stats/>} />
           <Route path='/settings' element={<Settings />} />
+          <Route path='/profile' element={<Profile />} />
         </Routes>
         </div>
       </div>

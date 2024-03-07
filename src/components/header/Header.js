@@ -1,5 +1,6 @@
 import React from 'react'
 import classes from './Header.module.css'
+import { Link } from 'react-router-dom'
 import { Logo } from '../logo/Logo'
 import {AiOutlineBell, AiOutlineMail} from 'react-icons/ai/index.esm'
 import {BsPersonCircle} from 'react-icons/bs/index.esm'
@@ -20,15 +21,23 @@ export const Header = () => {
       </div>
       <div id={classes.otherIcons}>
         
-        <div id={classes.bell} >
+
+        <Link   style={{color:"steelblue"}}>
+          <div id={classes.bell} >
           <AiOutlineBell size={size}/>
         </div>
-        <div id={classes.mail} >
-          <AiOutlineMail size={size}/>
-        </div>
-        <div id={classes.profile} >
+        </Link>
+        
+
+        <Link style={{color:"steelblue"}}>
+          <div id={classes.mail} >
+            <AiOutlineMail size={size}/>
+          </div>
+        </Link>
+        
+        <Link  to={'/profile'} id={classes.profile} style={{color:"steelblue"}} >
           <BsPersonCircle size={size}/>
-        </div>
+        </Link>
 
       </div>
 

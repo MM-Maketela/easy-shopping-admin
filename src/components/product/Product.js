@@ -8,7 +8,8 @@ import { Link } from 'react-router-dom';
 export const Product = (props) => {
   const {product} = props.info
   let [response, setResponse] = useState({})
-  
+
+  let _src = "data:image/*;base64,"+product['image']
   // handle edit 
   async function handleDelete(){
       await fetch(`http://localhost:3003/client/products/${product.id}`,{
@@ -37,11 +38,10 @@ export const Product = (props) => {
       </div>
       <div className={classes.info}>
 
-      <img src={image} id={classes.image}/>
+      <img src={_src} id={classes.image}/>
       <div id={classes.innerContainerInfo}>
         <div>
           {product.name}
-          
         </div>
         <div>
           {product.category}

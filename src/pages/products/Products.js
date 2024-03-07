@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react'
-
-
+import { Buffer } from 'buffer'
 import { MiniBar } from '../../components/mini-bar/MiniBar'
 import classes from './Products.module.css'
 import { Product } from '../../components/product/Product'
-import shoes from '../../assets/images/shoes.jpg'
 export const Products = () => {
-
   let [data, setData] = useState(null)
 
   //getting products
@@ -26,16 +23,14 @@ export const Products = () => {
     handleProducts()
   },[])
 
-  
   function productMap(products){
     let _products = []
+
     //handle image
-  
     for(let i =0; i<products.length; i++){
-        const product = {handleProducts:handleProducts, id:products[i].id, image:shoes, name:products[i].name, price:products[i].price, discount:products[i].discount,  category:products[i].category, details:products[i].details, new:products[i].new, brand:'testing brand', rating:4}
+        const product = {handleProducts:handleProducts, id:products[i].id, image:products[i]['image1'], name:products[i].productName, price:products[i].price, discount:products[i].discount,  category:products[i].category, details:products[i].details, new:products[i].new, brand:'testing brand', rating:4}
         _products.push(product)
     }
-
      return _products.map((product,index)=> <div key={index} className={classes.eachProduct}>{<Product info={{product:product}}/>}</div>)
   }
   return (
@@ -48,6 +43,7 @@ export const Products = () => {
       <div id={classes.productsInnerContainer}>
 
         {
+          
         productMap(data['data'])
         }
 

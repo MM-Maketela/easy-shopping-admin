@@ -1,4 +1,5 @@
 import React,{useEffect, useState} from 'react'
+import { Link } from 'react-router-dom'
 import classes from './AddProduct.module.css'
 import {RiImageAddLine} from 'react-icons/ri/index.esm'
 import { v4 as uuidv4} from 'uuid'
@@ -87,9 +88,16 @@ export const AddProduct = (props) => {
     })
     .then(res => res.json())
     .then(data => {(data['success'] >0 && data['data'].affectedRows>0) ?
-     toast.success(`product ${_process} to database.`, { position: toast.POSITION.TOP_CENTER, autoClose: 2000 }):
-     toast.warn(`product not ${_process} to database.`, { position: toast.POSITION.TOP_CENTER, autoClose: 2000 })
-    })
+     toast.success(`product ${_process} to database.`, { position: toast.POSITION.TOP_CENTER, autoClose: 1000 }):
+     toast.warn(`product not ${_process} to database.`, { position: toast.POSITION.TOP_CENTER, autoClose: 1000 })
+    }).then(
+      ()=>{
+        setTimeout(function () {
+          document.getElementsByName('back-to-products')[0].click()
+        }, 2000);
+        
+      }
+    )
   
       
     
@@ -198,6 +206,7 @@ export const AddProduct = (props) => {
           </ul>
         </div>
         <button type='submit' id={classes.submitBtn}>SUBMIT</button>
+        <Link  to={'/products'} name='back-to-products' hidden/>
       </form>
       </div>
   )
